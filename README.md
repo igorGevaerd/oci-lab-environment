@@ -7,7 +7,7 @@ A Terraform-based infrastructure-as-code project for deploying a Kubernetes clus
 This project deploys and manages OCI resources using Terraform with:
 - **Infrastructure as Code**: Everything defined in Terraform
 - **Remote State Management**: State stored in OCI Object Storage S3-compatible bucket
-- **Multi-Environment Support**: Separate workspaces for dev, staging, and production
+- **Development Environment**: Terraform workspace for dev environment
 - **Free Tier**: All resources within OCI Always Free tier limits
 - **Brazilian Region**: Located in `sa-saopaulo-1` (São Paulo)
 
@@ -82,11 +82,10 @@ terraform init
 terraform plan
 ```
 
-5. **Create workspaces**:
+5. **Create dev workspace**:
 ```bash
 terraform workspace new dev
-terraform workspace new staging
-terraform workspace new prod
+terraform workspace select dev
 ```
 
 ## 📚 Documentation
@@ -145,12 +144,6 @@ cd terraform/infra
 # Show current workspace
 terraform workspace show
 
-# List all workspaces
-terraform workspace list
-
-# Switch workspace
-terraform workspace select dev
-
 # Plan changes
 terraform plan -out=tfplan
 
@@ -205,9 +198,7 @@ See [SETUP-GUIDE.md](./docs/internal/SETUP-GUIDE.md) for detailed troubleshootin
 This project uses Terraform workspaces for environment isolation:
 
 - **default**: Initial workspace
-- **dev**: Development environment (testing)
-- **staging**: Staging environment (pre-production)
-- **prod**: Production environment
+- **dev**: Development/Lab environment (testing)
 
 Each workspace has its own state file stored in the S3-compatible bucket:
 ```
@@ -220,16 +211,9 @@ s3://terraform-states/infra/terraform.tfstate.d/<workspace-name>/terraform.tfsta
    - Define resources in `main.tf`
    - Common resources: VCN, Subnet, OKE Cluster, Compute Instances
 
-2. **Test in Dev**:
+2. **Deploy in Dev**:
    ```bash
    terraform workspace select dev
-   terraform plan
-   terraform apply
-   ```
-
-3. **Promote to Staging/Prod**:
-   ```bash
-   terraform workspace select staging
    terraform plan
    terraform apply
    ```

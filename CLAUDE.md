@@ -105,8 +105,8 @@ Key files to ignore (in .gitignore):
 - Never hardcode secrets in `.tf` files
 
 ### Variable Files
-- Can pass multiple variable files (from `terraform/infra` directory): `terraform plan -var-file="prod.tfvars"`
-- `-var` flag can override specific variables: `terraform plan -var="environment=prod"`
+- Can pass multiple variable files (from `terraform/infra` directory): `terraform plan -var-file="dev.tfvars"`
+- `-var` flag can override specific variables: `terraform plan -var="environment=dev"`
 - Always run Terraform commands from the `terraform/infra` directory
 
 ## OCI-Specific Guidance
@@ -135,7 +135,7 @@ The OCI provider should be configured with:
 5. **Use variables and outputs** to avoid hardcoding values and enable reusability
 6. **Use `for_each` or `count`** instead of copying resource blocks when creating multiple similar resources
 7. **Tag resources appropriately** for cost tracking and organization
-8. **Test in dev/lab environment first** before applying to production
+8. **Test thoroughly in dev environment** before infrastructure deployment
 
 ## Git Workflow
 
