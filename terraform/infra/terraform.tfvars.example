@@ -1,0 +1,11 @@
+# Copy this file to terraform.tfvars and fill in your OCI credentials
+# terraform.tfvars should NOT be committed to git
+
+tenancy_ocid     = "ocid1.tenancy.oc1..xxxxxxxxxxxxxxxxxxxxxxxx"
+user_ocid        = "ocid1.user.oc1..xxxxxxxxxxxxxxxxxxxxxxxx"
+fingerprint      = "xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx"
+private_key_path = "~/.oci/oci_api_key.pem"
+region           = "sa-saopaulo-1"
+namespace        = "grubbyvi3mov"  # From OCI Object Storage console
+environment      = "dev"
+project_name     = "oci-k8s-lab"
